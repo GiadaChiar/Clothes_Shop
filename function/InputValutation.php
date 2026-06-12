@@ -6,7 +6,6 @@
 function setValutation(string $data)
 {
 
-    echo "dati da esaminare per la query" . $data;
     $data = json_decode($data, true);
 
     if (!$data) {

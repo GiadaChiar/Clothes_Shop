@@ -22,12 +22,21 @@ class OpenAIService
         $category = $input["category"];
         $brand = $input["brand"];
         $state = $input["state"];
-        $imageUrl = $input["image_url"];
+        $image = $input["image"];
 
-        $imageData = downloadImage($imageUrl);
+        // rimuove header se presente
+        $base64 = preg_replace(
+            '#^data:image/\w+;base64,#i',
+            '',
+            $image
+        );
+
+
+
+        //$imageData = downloadImage($imageUrl);
 
         // 2. base64 vero file
-        $base64 = base64_encode($imageData);
+        //$base64 = base64_encode($imageData);
 
         $messages = [
             [
@@ -41,18 +50,19 @@ class OpenAIService
                         "type" => "text",
                         "text" =>
                         "Analizza questo prodotto e restituisci una valutazione."
-                            . "User ID: $userId, Category: $category, Brand: $brand, State: $state"
+                            . "category: $category, brand: $brand, state: $state"
                     ],
                     [
                         "type" => "image_url",
                         "image_url"  => [
-                            "url" => "data:image/jpeg;base64,$base64"
+                            "url" => $image
                         ]
                     ]
                 ]
             ]
         ];
 
-        return $this->client->chatVision($messages);
+
+        return $this->client->chatVision($messages,$userId);
     }
 }

@@ -21,12 +21,7 @@ class OpenAIClient
         $this->AI_Key = $_ENV['OPENAI_API_KEY'] ?? '';
     }
 
-    public function pront()
-    {
-        echo "La mia password è: " . $this->AI_Key;
-    }
-
-
+   
     /**
      * Esegue una chat completion con GPT-5.1.
      */
@@ -97,9 +92,15 @@ class OpenAIClient
 
 
 
-    //standard messages 
-    public function chatVision(array $messages): string
+
+
+
+
+    public function chatVision(array $messages, int $id_user): string
     {
+
+    
+
         $url = $this->baseUrl . '/chat/completions';
 
         $payload = [
@@ -124,21 +125,36 @@ class OpenAIClient
         $response = curl_exec($ch);
 
         if ($response === false) {
-            throw new RuntimeException(curl_error($ch));
+            $response = [
+                "success" => false,
+                "type" => "valutation",
+                "error" => "Errore nella risposta dell'AI"
+            ];
+            echo json_encode($response);
+            exit;
         }
 
         $data = json_decode($response, true);
 
         if (!isset($data['choices'][0]['message']['content'])) {
-            throw new RuntimeException('Errore risposta: ' . $response);
+            $response = [
+                "success" => false,
+                "type" => "valutation",
+                "error" => "Errore formatom dela risposta dell'AI, invalido"
+            ];
+            echo json_encode($response);
+            exit;
+            
         }
 
-
-
-        return $data['choices'][0]['message']['content'] ?? 'Errore risposta';
+        $content= $data['choices'][0]['message']['content'];
+        return $content;
     }
+
 }
 
 
-$ai = new  OpenAIClient();
-$ai->pront();
+
+
+
+

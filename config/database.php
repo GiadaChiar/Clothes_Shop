@@ -29,12 +29,6 @@ class Database
     }
 
 
-    public function printt(){
-        echo "La mia password è: " . $this->password;
-    }
-
-
-
 
     public function getConnection()
     {
@@ -46,7 +40,7 @@ class Database
             $this->conn->exec("set names utf8");
 
         } catch (PDOException $exception) {
-            //sendResponse(500, $exception->getMessage());
+
             die("Database connection error: " . $exception->getMessage());
         }
         return $this->conn;
@@ -55,10 +49,7 @@ class Database
 
 
 
-
-
 $db = new Database();
-$db->printt();
 $conn = $db->getConnection();
 
 

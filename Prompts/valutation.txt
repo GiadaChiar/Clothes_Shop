@@ -28,7 +28,8 @@ Valuta in base:
 2. Un range del prezzo di vendita.
 3. Motivami le risposte (1-2) che hai dato.
 4. La stagione del capo tra ("estate", "inverno", "primavera", "autunno")
-5. rarità tra (alto, medio, basso)
+5. rarità tra (alta, media, bassa)
+6. domanda tra (alta, media, bassa)
 4. 2-3 consigli brevi su come venderlo più velocemente
 
 

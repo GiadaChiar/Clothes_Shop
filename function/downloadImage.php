@@ -1,6 +1,7 @@
 <?php
 //downloadImage.php
 
+
 function downloadImage(string $url): string|false
 {
 $ch = curl_init($url);

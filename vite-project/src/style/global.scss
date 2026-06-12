@@ -1,0 +1,221 @@
+@use "variables" as vars;
+
+
+
+body {
+    margin: 20px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: #fff5f8;
+    position: relative;
+    //z-index: 0;
+
+    &::before,
+    &::after {
+    content: "";
+    position: fixed;
+    width: 150vw;
+    height: 150vw;
+    border-radius: 45%;
+    pointer-events: none;
+    }
+        
+    &::before {
+        background: vars.$background1;
+        top: -10vw;
+        left: -40vw;
+        animation: rotateBlob 25s linear infinite;
+    }
+
+    &::after {
+        background: vars.$background2;
+        top: -10vw;
+        right: -30vw;
+        animation: rotateBlobReverse 35s linear infinite;
+        //z-index: -1;
+    }
+
+
+    .page{
+        padding: 15px;
+        display: block;
+        //title 
+
+        .title{
+            font-family: vars.$font-Tan;
+            font-size: vars.$font-size-h3;
+            color:black;
+        }
+
+        
+
+        .inLine{
+            display: flex;
+            flex-wrap: wrap;
+            gap:20px;
+        }
+
+
+
+        .input-group.mb-3{
+            flex: 1 1 300px;
+        }
+        
+
+        .buttonSend{
+            margin-bottom: 30px;
+            &:hover{
+                background-color: vars.$background3;
+            }
+        }
+
+        .navbar-brand{
+            font-family: vars.$font-Tan;
+            font-size: vars.$font-size-h4;
+            text-decoration: underline;
+
+            &:hover{
+                color:vars.$background3;
+            }
+        }
+
+
+
+
+
+//login section 
+        //list 
+        #list{
+            margin-top: 60px;
+            padding:10px;
+            padding-top:30px;
+            color:vars.$background3;
+            border:2px solid vars.$background3 ;
+            border-radius: 2%;
+            border-style: double;
+            h4,p{
+                font-family: vars.$font-Tan;
+                padding-bottom: 30px;
+                margin:15px;
+            }
+        }
+        #input_login{
+            margin-top: 100px;
+            margin-bottom: 50px;
+        }
+    }
+
+
+    //valuatation section
+    .dropdowns{
+            display: flex;
+            flex-wrap: wrap;
+            gap:20px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            margin-top: 80px;
+
+            .dropdown{
+                .btn.btn-secondary.dropdown-toggle{
+                background-color: vars.$background3;
+
+                &:hover{
+                    background-color: vars.$background4;
+                }
+                }
+            }
+        }
+
+    #file{
+        margin-top: 30px;
+        margin-bottom: 80px;
+    }
+
+    #cartSection{
+        display: flex;
+        flex-wrap: wrap;
+        gap:20px;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+
+    //popUp
+
+    
+.custom-popup{
+    background-color: vars.$background2;
+    position: fixed;
+    top:auto;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:  1px solid vars.$background3;
+    z-index: 9998;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    width: 100%;
+
+    .popup-box{
+        background-color: vars.$background6;
+        padding-top: 35px;
+        padding-bottom: 15px;
+        padding-right: 70px;
+        padding-left: 70px;
+        margin-left: 30px;
+        margin-right: 30px;
+        border-radius: 8px;
+        width: auto;
+        height: auto;
+        max-width: 90%;
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        position: relative;
+        border:  1px solid vars.$background3;
+        z-index: 9997;
+
+        h4{
+            margin-bottom: 20px;
+            color:vars.$background3;
+            text-decoration: underline;
+        }
+
+        button{
+            &:hover{
+                background-color:vars.$background3;
+            }
+            
+        }
+
+        p{
+            margin-bottom: 15px;
+        }
+
+    }
+}
+}
+
+
+
+@keyframes rotateBlob {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotateBlobReverse {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+

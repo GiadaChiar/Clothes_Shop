@@ -1,0 +1,165 @@
+body {
+  margin: 20px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #fff5f8;
+  position: relative;
+}
+body::before, body::after {
+  content: "";
+  position: fixed;
+  width: 150vw;
+  height: 150vw;
+  border-radius: 45%;
+  pointer-events: none;
+}
+body::before {
+  background: rgba(255, 192, 203, 0.25);
+  top: -10vw;
+  left: -40vw;
+  animation: rotateBlob 25s linear infinite;
+}
+body::after {
+  background: rgba(244, 143, 177, 0.18);
+  top: -10vw;
+  right: -30vw;
+  animation: rotateBlobReverse 35s linear infinite;
+}
+body .page {
+  padding: 15px;
+  display: block;
+}
+body .page .title {
+  font-family: "Young Serif", serif;
+  font-size: 28px;
+  color: black;
+}
+body .page .inLine {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+body .page .input-group.mb-3 {
+  flex: 1 1 300px;
+}
+body .page .buttonSend {
+  margin-bottom: 30px;
+}
+body .page .buttonSend:hover {
+  background-color: rgb(181, 116, 116);
+}
+body .page .navbar-brand {
+  font-family: "Young Serif", serif;
+  font-size: 20px;
+  text-decoration: underline;
+}
+body .page .navbar-brand:hover {
+  color: rgb(181, 116, 116);
+}
+body .page #list {
+  margin-top: 60px;
+  padding: 10px;
+  padding-top: 30px;
+  color: rgb(181, 116, 116);
+  border: 2px solid rgb(181, 116, 116);
+  border-radius: 2%;
+  border-style: double;
+}
+body .page #list h4, body .page #list p {
+  font-family: "Young Serif", serif;
+  padding-bottom: 30px;
+  margin: 15px;
+}
+body .page #input_login {
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+body .dropdowns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  margin-top: 80px;
+}
+body .dropdowns .dropdown .btn.btn-secondary.dropdown-toggle {
+  background-color: rgb(181, 116, 116);
+}
+body .dropdowns .dropdown .btn.btn-secondary.dropdown-toggle:hover {
+  background-color: rgb(183, 143, 143);
+}
+body #file {
+  margin-top: 30px;
+  margin-bottom: 80px;
+}
+body #cartSection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+body .custom-popup {
+  background-color: rgba(244, 143, 177, 0.18);
+  position: fixed;
+  top: auto;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(181, 116, 116);
+  z-index: 9998;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  width: 100%;
+}
+body .custom-popup .popup-box {
+  background-color: rgb(254, 245, 245);
+  padding-top: 35px;
+  padding-bottom: 15px;
+  padding-right: 70px;
+  padding-left: 70px;
+  margin-left: 30px;
+  margin-right: 30px;
+  border-radius: 8px;
+  width: auto;
+  height: auto;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  border: 1px solid rgb(181, 116, 116);
+  z-index: 9997;
+}
+body .custom-popup .popup-box h4 {
+  margin-bottom: 20px;
+  color: rgb(181, 116, 116);
+  text-decoration: underline;
+}
+body .custom-popup .popup-box button:hover {
+  background-color: rgb(181, 116, 116);
+}
+body .custom-popup .popup-box p {
+  margin-bottom: 15px;
+}
+
+@keyframes rotateBlob {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotateBlobReverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+/*# sourceMappingURL=global.css.map */
