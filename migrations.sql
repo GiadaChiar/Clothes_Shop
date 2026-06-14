@@ -7,17 +7,20 @@ Creates the database structure for user,
 items, and AI valutations.
 */
 
-/*USER TABLE*/
-CREATE TABLE `users` (
-    `id` bigint NOT NULL AUTO_INCREMENT,
-    `email` varchar(255) DEFAULT NULL,
-    `name` varchar(100) DEFAULT NULL,
-    `surname` varchar(100) DEFAULT NULL,
-    `password_hash` varchar(255) DEFAULT NULL,
-    `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
+/* USER TABLE */
+CREATE TABLE users (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    email VARCHAR(255) DEFAULT NULL,
+    name VARCHAR(100) DEFAULT NULL,
+    surname VARCHAR(100) DEFAULT NULL,
+    password_hash VARCHAR(255) DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY email (email)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 /*CHAT TABLE*/
 
@@ -29,7 +32,8 @@ CREATE TABLE chats(
     FOREIGN KEY (user_id)
         REFERENCES users(id)
         ON DELETE CASCADE
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 
 /*ITEM TABLE*/
@@ -49,7 +53,8 @@ CREATE TABLE items (
     ON DELETE CASCADE,
         INDEX idx_user (user_id)
         
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 
 /*VALUTATION TABLE */
@@ -78,7 +83,7 @@ CREATE TABLE valuations (
         FOREIGN KEY (chat_id)
         REFERENCES chats(id)
         ON DELETE CASCADE
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 /*VALUTATION TIPS*/
@@ -91,4 +96,4 @@ CREATE TABLE valuation_tips (
 FOREIGN KEY (valuation_id)
 REFERENCES valuations(id)
 ON DELETE CASCADE
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

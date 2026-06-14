@@ -1,6 +1,6 @@
 //send data to back-end
 
-
+/*
 export async function SearchUser(data) {
     const response = await fetch(
         "/api/frontData.php",
@@ -19,4 +19,35 @@ export async function SearchUser(data) {
     console.log("stampo  ", result)
 
     return result;
+}*/
+
+
+
+
+
+//send data to back-end
+
+
+export async function SearchUser(data) {
+    const response = await fetch(
+        "/api/frontData.php",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        }
+    );
+
+
+    
+    const result = await response.json();
+    if (!result.success) {
+        console.error(result.error)
+    }
+    console.log("stampo  ", result)
+
+    return result;
 }
+

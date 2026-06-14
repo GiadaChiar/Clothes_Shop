@@ -34,7 +34,22 @@
             margin: 0;
             font-family: vars.$font-Tan;
             color:vars.$background3;
+    
 
+        }
+    }
+
+    .imageBox{
+        height:200px;
+        width: 100px;
+        overflow: hidden;
+        margin: auto;
+        margin-top: 25px;
+        img{
+            height: 100%;
+            width: 100%;
+            display: block;
+            object-fit: cover;
         }
     }
 

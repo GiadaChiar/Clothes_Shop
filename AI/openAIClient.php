@@ -140,6 +140,7 @@ class OpenAIClient
             $response = [
                 "success" => false,
                 "type" => "valutation",
+                "response"=> $response,
                 "error" => "Errore formatom dela risposta dell'AI, invalido"
             ];
             echo json_encode($response);
@@ -152,6 +153,20 @@ class OpenAIClient
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

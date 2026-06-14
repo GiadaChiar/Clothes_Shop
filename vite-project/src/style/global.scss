@@ -127,6 +127,9 @@ body {
             }
         }
 
+
+  
+
     #file{
         margin-top: 30px;
         margin-bottom: 80px;
@@ -184,12 +187,6 @@ body {
             text-decoration: underline;
         }
 
-        button{
-            &:hover{
-                background-color:vars.$background3;
-            }
-            
-        }
 
         p{
             margin-bottom: 15px;
@@ -197,6 +194,14 @@ body {
 
     }
 }
+
+
+button{
+            &:hover{
+                background-color:vars.$background3;
+            }
+            
+        }
 }
 
 

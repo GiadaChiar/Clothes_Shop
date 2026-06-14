@@ -5,6 +5,7 @@
 require_once __DIR__ . '/../AI/OpenAIClient.php';
 require_once __DIR__ . '/../function/downloadImage.php';
 
+
 //create new Item after Valuta button
 
 class OpenAIService
@@ -63,6 +64,8 @@ class OpenAIService
         ];
 
 
+
         return $this->client->chatVision($messages,$userId);
     }
 }
+

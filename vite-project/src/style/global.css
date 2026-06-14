@@ -138,11 +138,11 @@ body .custom-popup .popup-box h4 {
   color: rgb(181, 116, 116);
   text-decoration: underline;
 }
-body .custom-popup .popup-box button:hover {
-  background-color: rgb(181, 116, 116);
-}
 body .custom-popup .popup-box p {
   margin-bottom: 15px;
+}
+body button:hover {
+  background-color: rgb(181, 116, 116);
 }
 
 @keyframes rotateBlob {

@@ -4,15 +4,10 @@ require_once __DIR__ . '/../userRequests/LogIn.php';
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . "/../userRequests/newUser.php";
 require_once __DIR__ . "/../userRequests/valutation.php";
-
+require_once __DIR__ . "/../dbOperations/getValutations.php";
 
 //api call split in base of requests
 
-header('Content-Type: application/json');
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -84,6 +79,43 @@ switch ($request) {
 
         break;
 
+    case "all":
+
+
+        try {
+
+            $user_id = $data["user_id"] ?? null;
+
+            if (!$user_id) {
+                $response = [
+                    "success" => false,
+                    "type" => "all",
+                    "error" => "Errore, user id non trovato"
+                ];
+                break;
+            }
+
+            $model = new Valutations($conn);
+            $data = $model->getValuatations((int)$user_id);
+
+            $response = [
+                "success" => true,
+                "type" => "all",
+                "data" => $data
+            ];
+        } catch (Throwable $e) {
+
+            $response = [
+                "success" => false,
+                "type" => "all",
+                "error" => $e->getMessage()
+            ];
+        }
+
+        break;
+        
+
+
     default:
 
         http_response_code(400);
@@ -94,6 +126,10 @@ switch ($request) {
         ];
         break;
 }
+
+header('Content-Type: application/json');
+
+
 
 echo json_encode($response);
 exit;
