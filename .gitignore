@@ -1,6 +1,6 @@
-.env
+.env*
 vendor/
 node_modules/
 vendor/
 vite-project/node_modules/
-vite-project/.env
+vite-project/.env*

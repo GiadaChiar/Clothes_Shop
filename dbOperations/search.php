@@ -1,5 +1,5 @@
 <?php
-
+/*
 require_once __DIR__ . '/../config/database.php';
 
 class ChatRepository
@@ -34,3 +34,4 @@ class ChatRepository
         return $result ? (int)$result['id'] : null;
     }
 }
+*/

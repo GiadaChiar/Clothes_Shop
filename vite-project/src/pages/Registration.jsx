@@ -9,7 +9,7 @@ import "../style/global.css";
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { SearchUser } from "../function/SearchUser";
+import { registerUser } from "../api/authApi";
 import { useNavigate } from "react-router-dom";
 import CheckRegistration from "../function/ValutationRegistration";
 
@@ -49,7 +49,7 @@ export default function Registration() {
 
 
         try {
-            const user = await SearchUser({
+            const user = await registerUser({
                 request: "registration",
                 email: email,
                 name: name,

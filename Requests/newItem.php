@@ -1,7 +1,7 @@
 <?php
 
 //newItem.php
-
+/*
 require_once __DIR__ . '/../AI/OpenAIClient.php';
 require_once __DIR__ . '/../function/downloadImage.php';
 
@@ -69,3 +69,4 @@ class OpenAIService
     }
 }
 
+*/

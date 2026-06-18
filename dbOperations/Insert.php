@@ -1,4 +1,5 @@
 <?php
+/*
 
 //Only insert into Database 
 require_once __DIR__ . '/../config/database.php';
@@ -39,6 +40,6 @@ class Insert {
 
 
     
-}
+}*/
 
 ?>

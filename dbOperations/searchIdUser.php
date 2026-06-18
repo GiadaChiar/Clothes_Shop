@@ -1,5 +1,5 @@
 <?php
-
+/*
 //Only insert into Database 
 
 class SearchUser {
@@ -45,5 +45,5 @@ class SearchUser {
     }
 }
 
-
+*/
 ?>

@@ -7,7 +7,7 @@ import PopUp from "../components/popUp";
 
 import { DropDown } from "../components/dropdown";
 import { useState } from "react";
-import { SearchUser } from "../function/SearchUser";
+import { loginUser } from "../api/authApi";
 
 
 import { useLocation } from "react-router-dom";
@@ -19,7 +19,7 @@ import Loading from "../components/loading";
 import "../style/global.css";
 
 
-import  GenericCard  from "../components/genericCard";
+import GenericCard from "../components/genericCard";
 
 
 
@@ -57,20 +57,20 @@ export default function Valutation() {
     const handleAll = async () => {
         console.log("Cliccato ALL")
         setLoading(true);
-       
+
         //try {
-        
-        setMode("list"); 
+
+        setMode("list");
         setAllResults([]);
         setResult(null);
 
         const res = await getAllValutations(user_id);
-        
+
         if (res) {
             console.log("risultato arrivato : ", res);
             setAllResults(res.data);
-            
-            
+
+
         } else {
             console.log("non arrivato");
         }
@@ -80,13 +80,13 @@ export default function Valutation() {
         console.log("loading OFF");
     };
 
-    
+
     const handleValutation = async () => {
         console.log("CLICK FUNZIONA");
         setLoading(true);
-        setMode("single"); 
+        setMode("single");
         setAllResults([]);
-        
+
 
         const brand = validationInput(getBrand);
 
@@ -105,7 +105,7 @@ export default function Valutation() {
 
 
         try {
-            const user = await SearchUser({
+            const user = await loginUser({
                 request: "valutation",
                 category: getCategory,
                 state: getState,
@@ -116,7 +116,7 @@ export default function Valutation() {
 
 
 
-           
+
             setResult(null);
             setAllResults([])
 
@@ -159,7 +159,7 @@ export default function Valutation() {
                     });
                     return;
                 }
-                
+
 
             }
 
@@ -171,9 +171,9 @@ export default function Valutation() {
             });
             return;
         }
-     finally {
-        setLoading(false); 
-    }
+        finally {
+            setLoading(false);
+        }
     }
 
 
@@ -262,8 +262,8 @@ export default function Valutation() {
                         }}
                     />
                 </div>
-                
-                    <div>
+
+                <div>
                     <Button
                         id="btn_valutation"
                         className="buttonSend"
@@ -271,10 +271,10 @@ export default function Valutation() {
                         type="submit"
                         onClick={handleValutation}
 
-                        />
-                    </div>
+                    />
+                </div>
 
-                    <div>
+                <div>
                     <Button
                         id="btn_valutation"
                         className="showALL"
@@ -282,9 +282,9 @@ export default function Valutation() {
                         type="button"
                         onClick={handleAll}
 
-                        />
-                    </div>
-                
+                    />
+                </div>
+
                 <div id="cartSection">
 
                     {loading && <Loading />}

@@ -1,5 +1,5 @@
 <?php
-
+/*
 
 require_once __DIR__ . '/../config/database.php';
 //Search all valuatations for user 
@@ -65,4 +65,4 @@ WHERE user_id = :user_id;
 
     return $data;
 }
-}
+}*/
