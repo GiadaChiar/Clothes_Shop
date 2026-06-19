@@ -32,9 +32,9 @@ class UserController
                 http_response_code(400);
 
                 echo json_encode([
-                    "ok" => false,
-                    "error" => "Missing credentials",
-                    "data"=>$data
+                    "success" => false,
+                    "type" => "login",
+                    "error" => "credenziali incomplete",
                 ]);
                 exit;
             }
@@ -46,17 +46,21 @@ class UserController
                 http_response_code(200);
 
                 echo json_encode([
-                    "ok" => true,
-                    "result" => $result
+                    "success" => true,
+                    "type" => "login",
+                    "data" => $result
                 ]);
                 exit;
             }
         
         } catch (\Throwable $e) {
 
+            http_response_code(401);
+
             echo json_encode([
-                "ok" => false,
-                "error" => $e->getMessage(),
+                "success" => false,
+                "type" => "login",
+                "error" => $e->getMessage()
             ]);
             exit;
         }
@@ -96,19 +100,22 @@ class UserController
             $IdUser = $this->userService->registration($data);
 
             if ($IdUser) {
+                
                 http_response_code(200);
 
                 echo json_encode([
                     "success" => true,
                     "type" => "registration",
-                    "result" =>  $IdUser
+                    "data" =>  $IdUser
                 ]);
                 exit;
             }
         } catch (\Throwable $e) {
+            http_response_code(401);
 
             echo json_encode([
-                "ok" => false,
+                "success" => false,
+                "type" => "registration",
                 "error" => $e->getMessage(),
             ]);
             exit;

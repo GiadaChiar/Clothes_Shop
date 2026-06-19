@@ -1,5 +1,5 @@
 <?php
-/*
+
 
 //convert image to base64 to binary for database
 
@@ -19,6 +19,6 @@
         return $imageBinary;
     }
 
-*/
+
 
 ?>

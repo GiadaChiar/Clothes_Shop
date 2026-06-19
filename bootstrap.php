@@ -6,7 +6,7 @@ use App\Core\Database;
 require __DIR__ . '/vendor/autoload.php';
 
 // ENV
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/');
 $dotenv->load();
 
 // DATABASE (creato UNA volta)

@@ -12,7 +12,7 @@ class InsertModel
     {
         $this->db = $db;
     }
-    public function insert(string $table, array $data): int
+    public function insert(string $table, array $data): ?int
     {
 
 
@@ -27,6 +27,10 @@ class InsertModel
         $stmt->execute($data);
 
 
-        return (int)$this->db->lastInsertId();
+        $idInsert = (int)$this->db->lastInsertId();
+
+        return $idInsert ? : null;
     }
+
+
 }

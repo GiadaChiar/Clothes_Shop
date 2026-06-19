@@ -1,7 +1,7 @@
 <?php
 
 
-/*
+
 //function setValutation(string $data){
 function setValutation(string $data)
 {
@@ -23,5 +23,5 @@ function setValutation(string $data)
     //split my input for sql insert 
 
 
-}*/
+}
 ?>

@@ -1,7 +1,7 @@
 <?php
 //downloadImage.php
 
-/*
+
 function downloadImage(string $url): string|false
 {
 $ch = curl_init($url);
@@ -18,4 +18,4 @@ $data = curl_exec($ch);
 
 
 return $data;
-}*/
+}

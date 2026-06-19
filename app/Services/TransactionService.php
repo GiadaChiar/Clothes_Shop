@@ -11,6 +11,7 @@ class TransactionService
     public function __construct(PDO $db)
     {
         $this->db = $db;
+        
     }
 
     public function run(callable $callback): mixed
@@ -21,6 +22,8 @@ class TransactionService
             $result = $callback($this->db);
             $this->db->commit();
             return $result;
+
+            
         } catch (\Throwable $e) {
             $this->db->rollBack();
             throw $e;

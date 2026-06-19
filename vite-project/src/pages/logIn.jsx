@@ -1,19 +1,18 @@
-
 import Title from "../components/title";
 import Input from "../components/input";
 import List from "../components/list";
+import PopUp from "../components/popUp";
 import "../style/global.scss";
 import { useState } from "react";
 import Button from "../components/button";
-import { loginUser } from "../api/authApi";
 import { Link } from "react-router-dom";
 import handleValidation from "../function/ValidationLogin";
-import PopUp from "../components/popUp";
 import { useNavigate } from "react-router-dom";
+import { loginService } from "../services/authService";
 
 //login function
-
 export function LogIn() {
+
     const navigate = useNavigate();
 
     //get input
@@ -33,18 +32,12 @@ export function LogIn() {
         );
 
         if (!credentials) return;
-        console.log("credenziali trovate", credentials);
-
-        const email = credentials.email;
-        const password = credentials.password;
 
         try {
-            
-            const user = await loginUser({
-                    request: "login",
-                    email: email,
-                    password: password
-            });
+            const user = await loginService(
+                credentials.email,
+                credentials.password
+            );
 
             if (user.type === "login") {
                 console.log("arrivato richiesta", user.type)

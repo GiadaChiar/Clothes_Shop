@@ -1,16 +1,15 @@
 <?php
-/*
-require_once __DIR__ . '/../config/database.php';
 
-class ChatRepository
-{
+namespace App\Models;
 
-    private $conn;
+use PDO;
 
-    //my constructor for connection
-    public function __construct($db)
+class ChatModel{
+    private PDO $db;
+
+    public function __construct(PDO $db)
     {
-        $this->conn = $db;
+        $this->db = $db;
     }
 
 
@@ -24,7 +23,7 @@ class ChatRepository
         LIMIT 1
         ";
 
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->db->prepare($query);
         $stmt->execute([
             "user_id" => $userId
         ]);
@@ -34,4 +33,3 @@ class ChatRepository
         return $result ? (int)$result['id'] : null;
     }
 }
-*/

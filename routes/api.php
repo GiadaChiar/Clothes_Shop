@@ -2,6 +2,7 @@
 
 
 use App\Controllers\UserController;
+use App\Controllers\ItemController;
 
 
 // ROUTES API (NO VIEW)
@@ -14,3 +15,9 @@ $router->post('/api/auth/register', [UserController::class, 'registration']);
 
 // GET user id 
 //$router->get('/api/users/{id}', [UserController::class, 'showId']);
+
+
+//POST new item 
+$router->post('/api/item/new', [ItemController::class, 'new']);
+
+$router->post('/api/item/all', [ItemController::class, 'all']);

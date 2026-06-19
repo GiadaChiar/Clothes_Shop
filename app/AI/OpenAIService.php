@@ -1,9 +1,16 @@
 <?php
 
 //newItem.php
-/*
-require_once __DIR__ . '/../AI/OpenAIClient.php';
-require_once __DIR__ . '/../function/downloadImage.php';
+namespace App\AI;
+
+
+use App\AI\OpenAIClient;
+
+
+
+//require_once __DIR__ . '/../AI/OpenAIClient.php';
+//require_once __DIR__ . '/../function/downloadImage.php';
+require_once dirname(__DIR__, 2) . '/function/downloadImage.php';
 
 
 //create new Item after Valuta button
@@ -19,6 +26,8 @@ class OpenAIService
 
     public function newItem(array $input, string $systemPrompt): string
     {
+
+
         $userId = $input["user_id"];
         $category = $input["category"];
         $brand = $input["brand"];
@@ -64,9 +73,6 @@ class OpenAIService
         ];
 
 
-
-        return $this->client->chatVision($messages,$userId);
+        return $this->client->chatVision($messages, $userId);
     }
 }
-
-*/

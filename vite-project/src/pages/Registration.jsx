@@ -1,19 +1,16 @@
 
-
-
 import Title from "../components/title";
 import Input from "../components/input";
 import Button from "../components/button";
 import PopUp from "../components/popUp";
 import "../style/global.css";
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { registerUser } from "../api/authApi";
+import { registartionService } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 import CheckRegistration from "../function/ValutationRegistration";
 
-
+//registration new user
 export default function Registration() {
     const navigate = useNavigate();
     //get input
@@ -40,23 +37,14 @@ export default function Registration() {
         )
 
         if (!credentials) return;
-        console.log("credenziali trovate", credentials);
-
-        const email = credentials.email;
-        const name = credentials.name;
-        const surname = credentials.surname;
-        const password = credentials.password;
-
 
         try {
-            const user = await registerUser({
-                request: "registration",
-                email: email,
-                name: name,
-                surname: surname,
-                password_hash: password,
-
-            })
+            const user = await registartionService(
+                credentials.email,
+                credentials.name,
+                credentials.surname,
+                credentials.password,
+            )
             console.log("richiesta che è tornata", user);
             if (user.type === "registration") {
                 console.log("arrivato richiesta", user.type)

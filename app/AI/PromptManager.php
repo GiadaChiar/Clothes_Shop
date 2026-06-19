@@ -1,12 +1,14 @@
 <?php
 
+namespace App\AI;
+
 class PromptManager
 {
     private string $promptDir;
 
     public function __construct()
     {
-        $this->promptDir = __DIR__ . '/../Prompts/';
+        $this->promptDir = dirname(__DIR__, 2) . '/Prompts/';
     }
 
     public function get(string $name): string
@@ -14,7 +16,7 @@ class PromptManager
         $file = $this->promptDir . $name . '.txt';
 
         if (!file_exists($file)) {
-            throw new RuntimeException("Prompt non trovato: {$name}");
+            throw new \RuntimeException("Prompt non trovato: {$name}");
         }
 
         return file_get_contents($file);
@@ -22,8 +24,10 @@ class PromptManager
 
 
 
-    public function render(string $name, array $vars = []): string
+    public function render(string $name, array $vars =[]): string
     {
+        
+
         $prompt = $this->get($name);
 
         foreach ($vars as $key => $value) {
@@ -33,6 +37,8 @@ class PromptManager
                 $prompt
             );
         }
+
+        
 
         return $prompt;
     }

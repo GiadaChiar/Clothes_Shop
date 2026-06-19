@@ -1,11 +1,18 @@
 <?php
+
+
+
+namespace App\AI;
+
+
+use PDO;
 // OpenAIClient.php
 
-require_once __DIR__ . '/../config/database.php';
-require __DIR__ . '/../vendor/autoload.php';
-
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->load();
+//require_once __DIR__ . '/../config/database.php';
+require dirname(__DIR__, 2) . '/vendor/autoload.php';
+/*
+$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();*/
 
 class OpenAIClient
 {
@@ -16,12 +23,12 @@ class OpenAIClient
     public function __construct()
     {
         if (!isset($_ENV['OPENAI_API_KEY'])) {
-            throw new RuntimeException("OPENAI_API_KEY non trovata nel .env");
+            throw new \RuntimeException("OPENAI_API_KEY non trovata nel .env");
         }
         $this->AI_Key = $_ENV['OPENAI_API_KEY'] ?? '';
     }
 
-   
+
     /**
      * Esegue una chat completion con GPT-5.1.
      */
@@ -71,19 +78,19 @@ class OpenAIClient
 
         if ($responseBody === false) {
             $error = curl_error($ch);
-            throw new RuntimeException('Errore nella chiamata cURL a OpenAI: ' . $error);
+            throw new \RuntimeException('Errore nella chiamata cURL a OpenAI: ' . $error);
         }
 
         $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
         if ($statusCode < 200 || $statusCode >= 300) {
-            throw new RuntimeException('OpenAI ha restituito status ' . $statusCode . ': ' . $responseBody);
+            throw new \RuntimeException('OpenAI ha restituito status ' . $statusCode . ': ' . $responseBody);
         }
 
         $data = json_decode($responseBody, true);
 
         if (!isset($data['choices'][0]['message']['content'])) {
-            throw new RuntimeException('Risposta OpenAI senza contenuto valido: ' . $responseBody);
+            throw new \RuntimeException('Risposta OpenAI senza contenuto valido: ' . $responseBody);
         }
 
         return $data['choices'][0]['message']['content'];
@@ -99,7 +106,6 @@ class OpenAIClient
     public function chatVision(array $messages, int $id_user): string
     {
 
-    
 
         $url = $this->baseUrl . '/chat/completions';
 
@@ -124,6 +130,8 @@ class OpenAIClient
 
         $response = curl_exec($ch);
 
+        /*
+
         if ($response === false) {
             $response = [
                 "success" => false,
@@ -131,6 +139,23 @@ class OpenAIClient
                 "error" => "Errore nella risposta dell'AI"
             ];
             echo json_encode($response);
+            exit;
+        }*/
+
+
+        $response = curl_exec($ch);
+
+        if ($response === false) {
+            $error = curl_error($ch);
+            $errno = curl_errno($ch);
+
+            echo json_encode([
+                "success" => false,
+                "type" => "valutation",
+                "error" => "cURL failed",
+                "errno" => $errno,
+                "details" => $error
+            ]);
             exit;
         }
 
@@ -140,36 +165,14 @@ class OpenAIClient
             $response = [
                 "success" => false,
                 "type" => "valutation",
-                "response"=> $response,
+                "response" => $response,
                 "error" => "Errore formatom dela risposta dell'AI, invalido"
             ];
             echo json_encode($response);
             exit;
-            
         }
 
-        $content= $data['choices'][0]['message']['content'];
+        $content = $data['choices'][0]['message']['content'];
         return $content;
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

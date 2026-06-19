@@ -1,5 +1,5 @@
 <?php
-/*
+
 //clear format for AI responses
 
 function cleanResponse(string $response): array
@@ -17,7 +17,7 @@ function cleanResponse(string $response): array
 }
 
 
-*/
+
 
 
 ?>
