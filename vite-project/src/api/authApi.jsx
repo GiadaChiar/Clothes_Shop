@@ -13,3 +13,19 @@ export function loginUser(data) {
         body: JSON.stringify(data)
     });
 }
+
+
+export function valutation(data) {
+    return apiRequest("/api/item/new", {
+        method: "POST",
+        body: JSON.stringify(data)
+    })
+}
+
+
+export function getAllValutations(data) {
+    return apiRequest("/api/item/all", {
+        method: "POST",
+        body: JSON.stringify(data)
+    })
+}

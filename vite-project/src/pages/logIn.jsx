@@ -39,11 +39,7 @@ export function LogIn() {
         const password = credentials.password;
 
         try {
-            /*const user = await ApiFetch({
-                request: "login",
-                email: email,
-                password: password,
-            })*/
+            
             const user = await loginUser({
                     request: "login",
                     email: email,

@@ -7,13 +7,13 @@ import PopUp from "../components/popUp";
 
 import { DropDown } from "../components/dropdown";
 import { useState } from "react";
-import { loginUser } from "../api/authApi";
+import { valutation } from "../api/authApi";
 
 
 import { useLocation } from "react-router-dom";
 import { validationInput } from "../function/Validation";
 //import { useNavigate } from "react-router-dom";
-import { getAllValutations } from "../function/getAll";
+import { getAllValutations } from "../api/authApi";
 import Loading from "../components/loading";
 //import { useEffect } from "react";
 import "../style/global.css";
@@ -105,7 +105,7 @@ export default function Valutation() {
 
 
         try {
-            const user = await loginUser({
+            const user = await valutation({
                 request: "valutation",
                 category: getCategory,
                 state: getState,
