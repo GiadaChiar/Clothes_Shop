@@ -35,9 +35,21 @@ class Router
     {
         $method = $_SERVER['REQUEST_METHOD'];
 
+        // 🔥 FIX: normalizzazione completa URI
         $uri = parse_url($uri, PHP_URL_PATH);
 
+        $uri = rawurldecode($uri);          // <-- IMPORTANTISSIMO
+        $uri = trim($uri);                  // rimuove spazi e newline
+        $uri = preg_replace('/\s+/', '', $uri); // elimina \n \r spazi
+        $uri = rtrim($uri, '/');            // normalizza slash
+
+        if ($uri === '') {
+            $uri = '/';
+        }
+
         foreach ($this->routes[$method] as $route => $action) {
+
+            $route = rtrim($route, '/'); // 🔥 anche route normalizzate
 
             $pattern = preg_replace('#\{[\w]+\}#', '(\d+)', $route);
             $pattern = "#^" . $pattern . "$#";
