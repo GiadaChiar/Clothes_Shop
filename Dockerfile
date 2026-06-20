@@ -1,19 +1,22 @@
 FROM php:8.4-apache
 
-# installa estensioni PHP necessarie
-RUN docker-php-ext-install pdo pdo_mysql
+# install system dependencies + zip
+RUN apt-get update && apt-get install -y \
+    unzip \
+    libzip-dev \
+    zip \
+    && docker-php-ext-install pdo pdo_mysql zip
 
-# abilita rewrite (utile per router)
+# enable apache rewrite
 RUN a2enmod rewrite
 
-# copia codice
-COPY . /var/www/html
-
-# installa composer
+# install composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# installa dipendenze PHP
-RUN composer install --no-dev --optimize-autoloader
+# copy project
+COPY . /var/www/html
 
-# set working dir
 WORKDIR /var/www/html
+
+# install dependencies
+RUN composer install --no-dev --optimize-autoloader
