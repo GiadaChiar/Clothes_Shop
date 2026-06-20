@@ -23,9 +23,17 @@ $router = new Router();
 require __DIR__ . '/../routes/api.php';
 
 // 🔥 IMPORTANTE: PULIZIA URI
+//$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$uri = preg_replace('/\s+/', '', $uri); // elimina \n \r spazi
+$uri = rtrim($uri, '/');
+
+if ($uri === '') {
+    $uri = '/';
+}
 
 $router->dispatch($uri, $pdo);
 var_dump($_SERVER['REQUEST_URI']);
 var_dump($_SERVER['REQUEST_METHOD']);
+var_dump($uri);
 exit;
