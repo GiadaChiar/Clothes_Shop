@@ -3,15 +3,13 @@
 
 use App\Controllers\UserController;
 use App\Controllers\ItemController;
+use App\Controllers\HomeController;
 
 
 //standard route default 
-$router->get('/', function () {
-    echo json_encode([
-        "success" => true,
-        "message" => "ClothesShop API is running"
-    ]);
-});
+
+
+$router->get('/', [HomeController::class, 'index']);
 
 
 // ROUTES API (NO VIEW)
