@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { loginService } from "../services/authService";
 
 
-console.log("API URL:", import.meta.env.VITE_API_URL);
+console.log("DEPLOY CHECK:", import.meta.env.VITE_API_URL);
 //login function
 export function LogIn() {
 
