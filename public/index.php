@@ -26,5 +26,6 @@ require __DIR__ . '/../routes/api.php';
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 $router->dispatch($uri, $pdo);
-/*var_dump($_SERVER['REQUEST_URI']);
-var_dump($_SERVER['REQUEST_METHOD']);*/
+var_dump($_SERVER['REQUEST_URI']);
+var_dump($_SERVER['REQUEST_METHOD']);
+exit;
