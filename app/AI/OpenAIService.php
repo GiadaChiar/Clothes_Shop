@@ -1,13 +1,10 @@
 <?php
 
 //newItem.php
+
 namespace App\AI;
 
-
 use App\AI\OpenAIClient;
-
-
-
 
 require_once dirname(__DIR__, 2) . '/function/downloadImage.php';
 
@@ -37,38 +34,34 @@ class OpenAIService
         $base64 = preg_replace(
             '#^data:image/\w+;base64,#i',
             '',
-            $image
+            $image,
         );
 
 
-
-        //$imageData = downloadImage($imageUrl);
-
-        // 2. base64 vero file
-        //$base64 = base64_encode($imageData);
+        // 2. base64
 
         $messages = [
             [
                 "role" => "system",
-                "content" => $systemPrompt
+                "content" => $systemPrompt,
             ],
             [
                 "role" => "user",
                 "content" => [
                     [
                         "type" => "text",
-                        "text" =>
-                        "Analizza questo prodotto e restituisci una valutazione."
-                            . "category: $category, brand: $brand, state: $state"
+                        "text"
+                        => "Analizza questo prodotto e restituisci una valutazione."
+                            . "category: $category, brand: $brand, state: $state",
                     ],
                     [
                         "type" => "image_url",
                         "image_url"  => [
-                            "url" => $image
-                        ]
-                    ]
-                ]
-            ]
+                            "url" => $image,
+                        ],
+                    ],
+                ],
+            ],
         ];
 
 

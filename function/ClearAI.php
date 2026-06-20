@@ -15,9 +15,3 @@ function cleanResponse(string $response): array
 
     return $decoded;
 }
-
-
-
-
-
-?>

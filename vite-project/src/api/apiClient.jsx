@@ -1,37 +1,6 @@
 
 
-
-//api client baase
-/*
-export async function apiRequest(endpoint, options = {}) {
-    const API_URL = import.meta.env.VITE_API_URL;
-
-    const response = await fetch(`${API_URL}${endpoint}`, {
-        headers: {
-            "Content-Type": "application/json",
-            ...(options.headers || {})
-        },
-        ...options
-    });
-
-    const result = await response.json();
-
-    console.log("stampo", result);
-
-    if (!response.ok) {
-        throw new Error(result?.error || "API error");
-    }
-
-    return result;
-}
-*/
-
-
-
-
-
-
-//api client baase
+//api client base
 export async function apiRequest(endpoint, options = {}) {
     const API_URL = import.meta.env.VITE_API_URL;
 

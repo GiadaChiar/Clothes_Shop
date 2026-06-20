@@ -27,9 +27,9 @@ class InsertModel
         $stmt->execute($data);
 
 
-        $idInsert = (int)$this->db->lastInsertId();
+        $idInsert = (int) $this->db->lastInsertId();
 
-        return $idInsert ? : null;
+        return $idInsert ?: null;
     }
 
 

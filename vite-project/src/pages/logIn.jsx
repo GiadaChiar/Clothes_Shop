@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { loginService } from "../services/authService";
 
 
-console.log("DEPLOY CHECK:", import.meta.env.VITE_API_URL);
+
 //login function
 export function LogIn() {
 
@@ -42,7 +42,7 @@ export function LogIn() {
             );
 
             if (user.type === "login") {
-                console.log("arrivato richiesta", user.type)
+
                 if (user.success === false) {
                     setPopup({
                         visible: true,

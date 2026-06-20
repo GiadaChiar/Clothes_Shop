@@ -19,10 +19,10 @@ class ItemModel
 
         $query = "
             SELECT
-            val.suggested_price, val.range_min, val.range_max, val.motivation, 
+            val.suggested_price, val.range_min, val.range_max, val.motivation,
             val.season, val.rarity, val.demand,items.brand,items.image,
-            items.id as id_item FROM items 
-            INNER JOIN valutations as val 
+            items.id as id_item FROM items
+            INNER JOIN valutations as val
                 ON val.item_id = items.id
             WHERE user_id = :user_id;
             ";
@@ -34,11 +34,11 @@ class ItemModel
 
         if ($data === false) {
             die(json_encode([
-                "error" => "FETCH FALLITA"
+                "error" => "FETCH FALLITA",
             ]));
         }
 
-        //convert value image 
+        //convert value image
         foreach ($data as &$row) {
             if (!empty($row["image"])) {
                 $base64 = base64_encode($row["image"]);
@@ -46,6 +46,6 @@ class ItemModel
             }
         }
 
-        return $data ? : null;
+        return $data ?: null;
     }
 }

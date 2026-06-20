@@ -1,7 +1,5 @@
 <?php
 
-
-
 namespace App\Controllers;
 
 use PDO;
@@ -42,17 +40,17 @@ class UserController
             // chiamata service
             $result = $this->userService->login($email, $password);
 
-            if($result){
+            if ($result) {
                 http_response_code(200);
 
                 echo json_encode([
                     "success" => true,
                     "type" => "login",
-                    "data" => $result
+                    "data" => $result,
                 ]);
                 exit;
             }
-        
+
         } catch (\Throwable $e) {
 
             http_response_code(401);
@@ -60,7 +58,7 @@ class UserController
             echo json_encode([
                 "success" => false,
                 "type" => "login",
-                "error" => $e->getMessage()
+                "error" => $e->getMessage(),
             ]);
             exit;
         }
@@ -70,7 +68,8 @@ class UserController
 
 
 
-    public function registration(){
+    public function registration()
+    {
 
 
         try {
@@ -91,7 +90,7 @@ class UserController
                 echo json_encode([
                     "success" => false,
                     "type" => "registration",
-                    "error" => "Campi mancanti o incorretti"
+                    "error" => "Campi mancanti o incorretti",
                 ]);
                 exit;
             }
@@ -100,13 +99,13 @@ class UserController
             $IdUser = $this->userService->registration($data);
 
             if ($IdUser) {
-                
+
                 http_response_code(200);
 
                 echo json_encode([
                     "success" => true,
                     "type" => "registration",
-                    "data" =>  $IdUser
+                    "data" =>  $IdUser,
                 ]);
                 exit;
             }

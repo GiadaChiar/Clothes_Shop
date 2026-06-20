@@ -17,11 +17,10 @@ function setValutation(string $data)
 
     return [
         'valuation' => $data,
-        'tips' => $tips
+        'tips' => $tips,
     ];
 
-    //split my input for sql insert 
+    //split my input for sql insert
 
 
 }
-?>

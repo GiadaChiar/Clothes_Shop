@@ -16,8 +16,8 @@ export default function UploadImage({ onUpload }) {
         reader.onload = () => {
             const base64 = reader.result;
 
-            setPreview(base64);   // opzionale: per vedere immagine
-            onUpload(base64);     // manda al parent
+            setPreview(base64);   // to see image
+            onUpload(base64);     // send to parent
         };
     };
 

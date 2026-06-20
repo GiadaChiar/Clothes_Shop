@@ -7,7 +7,6 @@ import { validationInput } from "./Validation";
 
 export default function CheckRegistration(getEmail, getName, getSurname, getPassword, getCopyPassword, setPopup) {
 
-    console.log("CLICK FUNZIONA");
 
     if (!getEmail || !getSurname || !getName || !getCopyPassword || !getPassword) {
         setPopup({

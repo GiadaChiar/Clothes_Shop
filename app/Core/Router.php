@@ -71,7 +71,7 @@ class Router
         http_response_code(404);
         echo json_encode([
             "success" => false,
-            "error" => "Route not found"
+            "error" => "Route not found",
         ]);
     }
 }

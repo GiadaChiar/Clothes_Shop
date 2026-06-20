@@ -4,7 +4,8 @@ namespace App\Models;
 
 use PDO;
 
-class ChatModel{
+class ChatModel
+{
     private PDO $db;
 
     public function __construct(PDO $db)
@@ -25,11 +26,11 @@ class ChatModel{
 
         $stmt = $this->db->prepare($query);
         $stmt->execute([
-            "user_id" => $userId
+            "user_id" => $userId,
         ]);
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        return $result ? (int)$result['id'] : null;
+        return $result ? (int) $result['id'] : null;
     }
 }

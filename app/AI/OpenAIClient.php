@@ -1,18 +1,11 @@
 <?php
 
-
-
 namespace App\AI;
 
-
 use PDO;
-// OpenAIClient.php
 
-//require_once __DIR__ . '/../config/database.php';
 require dirname(__DIR__, 2) . '/vendor/autoload.php';
-/*
-$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->load();*/
+
 
 class OpenAIClient
 {
@@ -41,20 +34,20 @@ class OpenAIClient
         if ($systemPrompt) {
             $messages[] = [
                 'role' => 'system',
-                'content' => $systemPrompt
+                'content' => $systemPrompt,
             ];
         }
 
         $messages[] = [
             'role' => 'user',
-            'content' => $userMessage
+            'content' => $userMessage,
         ];
 
         $payload = [
             'model' => 'gpt-4o-mini',
             'messages' => $messages,
             'temperature' => 0.4,
-            'max_tokens' => 300
+            'max_tokens' => 300,
         ];
 
         $ch = curl_init($url);
@@ -113,7 +106,7 @@ class OpenAIClient
             'model' => 'gpt-4o-mini',
             'messages' => $messages,
             'temperature' => 0.4,
-            'max_tokens' => 300
+            'max_tokens' => 300,
         ];
 
         $ch = curl_init($url);
@@ -130,19 +123,6 @@ class OpenAIClient
 
         $response = curl_exec($ch);
 
-        /*
-
-        if ($response === false) {
-            $response = [
-                "success" => false,
-                "type" => "valutation",
-                "error" => "Errore nella risposta dell'AI"
-            ];
-            echo json_encode($response);
-            exit;
-        }*/
-
-
         $response = curl_exec($ch);
 
         if ($response === false) {
@@ -154,7 +134,7 @@ class OpenAIClient
                 "type" => "valutation",
                 "error" => "cURL failed",
                 "errno" => $errno,
-                "details" => $error
+                "details" => $error,
             ]);
             exit;
         }
@@ -166,7 +146,7 @@ class OpenAIClient
                 "success" => false,
                 "type" => "valutation",
                 "response" => $response,
-                "error" => "Errore formatom dela risposta dell'AI, invalido"
+                "error" => "Errore formatom dela risposta dell'AI, invalido",
             ];
             echo json_encode($response);
             exit;

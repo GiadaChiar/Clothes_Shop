@@ -24,9 +24,9 @@ class PromptManager
 
 
 
-    public function render(string $name, array $vars =[]): string
+    public function render(string $name, array $vars = []): string
     {
-        
+
 
         $prompt = $this->get($name);
 
@@ -34,11 +34,11 @@ class PromptManager
             $prompt = str_replace(
                 '{{' . $key . '}}',
                 $value,
-                $prompt
+                $prompt,
             );
         }
 
-        
+
 
         return $prompt;
     }

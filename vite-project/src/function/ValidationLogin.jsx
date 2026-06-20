@@ -4,7 +4,6 @@ import { validationEmail } from "./Validation";
 
 export default  function handleValidation(getEmail, getPassword, setPopup) {
 
-    console.log("CLICK FUNZIONA");
     
     const email = validationEmail(getEmail)
     const password = validationPassword(getPassword);

@@ -14,9 +14,9 @@ export default function GenericCard({ data }) {
 
     if (!data) return null;
 
-    console.log("arribato fino a quibiuniuuihhnjiu", data);
+    
 
-    // 🔥 NORMALIZZAZIONE SICURA
+    // standard 2 opptions
     const isAiMode = !!data.ai;
     const ai = isAiMode ? data.ai : data;
     const tips = isAiMode ? (data.tips || []) : [];
@@ -45,7 +45,7 @@ export default function GenericCard({ data }) {
                 </div>
             )}
 
-            {/* PRICE HERO (solo AI mode) */}
+            {/* PRICE HERO (only AI mode) */}
             
                 <div className="priceHero">
                     <div className="price">€ {ai.suggested_price}</div>
@@ -55,7 +55,7 @@ export default function GenericCard({ data }) {
                 </div>
             
 
-            {/* TAGS (solo AI mode) */}
+            {/* TAGS (only AI mode) */}
             
                 <div className="tags">
                     <span className={`tag demand ${ai.demand}`}>
@@ -72,7 +72,7 @@ export default function GenericCard({ data }) {
                 </div>
             
 
-            {/* ANALISI */}
+            {/* MOVIVATIONS */}
             {ai.motivation && (
                 <div className="block">
                     <h3>🧠 Analisi</h3>

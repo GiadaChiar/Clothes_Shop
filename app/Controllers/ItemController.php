@@ -1,7 +1,5 @@
 <?php
 
-
-
 namespace App\Controllers;
 
 use PDO;
@@ -10,7 +8,6 @@ use App\Services\ItemService;
 // All about items (insert and valutation)
 class ItemController
 {
-
     private ItemService $itemService;
 
     public function __construct(PDO $db)
@@ -20,11 +17,12 @@ class ItemController
 
 
     // create a new item valutation
-    public function new(){
+    public function new()
+    {
         try {
 
             header('Content-Type: application/json');
-            
+
             $data = json_decode(file_get_contents("php://input"), true);
 
             $category = $data['category'] ?? null;
@@ -40,7 +38,7 @@ class ItemController
                 echo json_encode([
                     "success" => false,
                     "type" => "valutation",
-                    "credential"=>$data,
+                    "credential" => $data,
                     "error" => "Credenziali mancanti o incomplete",
                 ]);
                 exit;
@@ -53,7 +51,7 @@ class ItemController
 
                 echo json_encode([
                     "success" => true,
-                    "debug" => $result
+                    "debug" => $result,
                 ]);
                 exit;
             }
@@ -87,7 +85,7 @@ class ItemController
                 echo json_encode([
                     "success" => false,
                     "type" => "all",
-                    "error" => "Errore durante l'accesso, utente non autentificato correttamente, rifare il login"
+                    "error" => "Errore durante l'accesso, utente non autentificato correttamente, rifare il login",
                 ]);
                 exit;
             }
@@ -95,16 +93,16 @@ class ItemController
             $result = $this->itemService->allValutations($user_id);
 
 
-            if($result){
+            if ($result) {
 
-            http_response_code(200);
+                http_response_code(200);
 
-            echo json_encode([
-                "success" => true,
-                "type" => "all",
-                "data" => $result 
-            ]);
-            exit;
+                echo json_encode([
+                    "success" => true,
+                    "type" => "all",
+                    "data" => $result,
+                ]);
+                exit;
             }
 
         } catch (\Throwable $e) {
@@ -114,7 +112,7 @@ class ItemController
             echo json_encode([
                 "success" => false,
                 "type" => "all",
-                "error" => $e->getMessage()
+                "error" => $e->getMessage(),
             ]);
             exit;
         }

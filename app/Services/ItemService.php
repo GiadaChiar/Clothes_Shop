@@ -15,7 +15,6 @@ use PDO;
 
 class ItemService
 {
-
     private PDO $db;
     private TransactionService $transaction;
     private ItemModel $itemModel;
@@ -42,9 +41,9 @@ class ItemService
 
         $userId = (int) $data['user_id'];
 
-        if(!$userId){
+        if (!$userId) {
             throw new \Exception(
-                "Errore di autentificazione, ripetere il login"
+                "Errore di autentificazione, ripetere il login",
             );
         }
 
@@ -52,7 +51,7 @@ class ItemService
 
         if (!$all) {
             throw new \Exception(
-                "Nessuna valutazione trovata"
+                "Nessuna valutazione trovata",
             );
         }
         return $all ?: null;
@@ -76,7 +75,7 @@ class ItemService
             echo json_encode([
                 "success" => false,
                 "type" => "valutation",
-                "error" => "Errore nell'invio dei dati"
+                "error" => "Errore nell'invio dei dati",
             ]);
             exit;
         }
@@ -87,7 +86,7 @@ class ItemService
             'category'   => $category,
             'brand'      => $brand,
             'state'      => $state,
-            'image_url'  => $image
+            'image_url'  => $image,
         ]);
 
 
@@ -97,24 +96,24 @@ class ItemService
         if (empty($response)) {
             echo json_encode([
                 "success" => false,
-                "error" => "Errore nella valutazione con l'AI, riprovare tra qualche minuto"
+                "error" => "Errore nella valutazione con l'AI, riprovare tra qualche minuto",
             ]);
             exit;
         }
 
-        // 4. clean reasponse AI 
+        // 4. clean reasponse AI
         $result = cleanResponse($response);
 
         if (!is_array($result)) {
             echo json_encode([
                 "success" => false,
-                "error" => "Errore risposta AI non formattata adeguatamente, riprovare"
+                "error" => "Errore risposta AI non formattata adeguatamente, riprovare",
             ]);
             exit;
         }
 
         // 5. insert valutation into db
-        $insert = $this->insertValutation($input, (int)$user_id, $result);
+        $insert = $this->insertValutation($input, (int) $user_id, $result);
 
 
         return $insert;
@@ -128,86 +127,87 @@ class ItemService
         return $this->transaction->run(
             function (PDO $db) use ($input, $user_id, $result) {
 
-        $image = $input["image"] ?? '';
-        $user_id = $input["user_id"] ?? '';
-        unset($input["request"]);
+                $image = $input["image"] ?? '';
+                $user_id = $input["user_id"] ?? '';
+                unset($input["request"]);
 
 
-        
-            //1. change image from baase64 to binary for database insert
-            $image = preg_replace(
-                '#^data:image/\w+;base64,#i',
-                '',
-                $image
-            );
 
-            $binary = base64_decode($image);
+                //1. change image from baase64 to binary for database insert
+                $image = preg_replace(
+                    '#^data:image/\w+;base64,#i',
+                    '',
+                    $image,
+                );
 
-            $input["image"] = $binary;
+                $binary = base64_decode($image);
 
-            if (!$binary) {
-                throw new \Exception("Errore durante la conversione dell'immagine");
-            }
+                $input["image"] = $binary;
 
-            //2. insert new item (user item) into db
-            $itemId = $this->insertModel->insert("items", $input);
+                if (!$binary) {
+                    throw new \Exception("Errore durante la conversione dell'immagine");
+                }
 
-            if (!$itemId) {
-                throw new \Exception("Errore durante la memorizzazione dell'aricolo inserito, riprovare");
-            }
+                //2. insert new item (user item) into db
+                $itemId = $this->insertModel->insert("items", $input);
 
-            // 3. insert relation between item and chat 
-            $chatId = $this->chatRepo->getLastChatIdByUser($user_id);
-            if (!$chatId) {
-                throw new \Exception("Errore durante l'associazione dell'aricolo inserito, riprovare");
-            }
+                if (!$itemId) {
+                    throw new \Exception("Errore durante la memorizzazione dell'aricolo inserito, riprovare");
+                }
 
-            // 4. split data tips and valutation
-            $tips = $result['selling_tips'] ?? [];
+                // 3. insert relation between item and chat
+                $chatId = $this->chatRepo->getLastChatIdByUser($user_id);
+                if (!$chatId) {
+                    throw new \Exception("Errore durante l'associazione dell'aricolo inserito, riprovare");
+                }
+
+                // 4. split data tips and valutation
+                $tips = $result['selling_tips'] ?? [];
 
 
-            unset($result['selling_tips']);
+                unset($result['selling_tips']);
 
-            if (!$tips || !$result) {
-                throw new \Exception("Errore durante la separazione tra la valutazione e i consigli, riprovare");
-            }
+                if (!$tips || !$result) {
+                    throw new \Exception("Errore durante la separazione tra la valutazione e i consigli, riprovare");
+                }
 
-            // 5. Setting data
-            $valuation = [
-                "chat_id" => $chatId,
-                "item_id" => $itemId,
-                "suggested_price" => $result["suggested_price"] ?? null,
-                "range_min" => $result["range_min"] ?? null,
-                "range_max" => $result["range_max"] ?? null,
-                "motivation" => $result["motivation"] ?? null,
-                "season" => $result["season"] ?? null,
-                "rarity" => strtolower(trim($result["rarity"] ?? null)),
-                "demand" => strtolower(trim($result["demand"] ?? null)),
-            ];
+                // 5. Setting data
+                $valuation = [
+                    "chat_id" => $chatId,
+                    "item_id" => $itemId,
+                    "suggested_price" => $result["suggested_price"] ?? null,
+                    "range_min" => $result["range_min"] ?? null,
+                    "range_max" => $result["range_max"] ?? null,
+                    "motivation" => $result["motivation"] ?? null,
+                    "season" => $result["season"] ?? null,
+                    "rarity" => strtolower(trim($result["rarity"] ?? null)),
+                    "demand" => strtolower(trim($result["demand"] ?? null)),
+                ];
 
-            // 6.insert valutation into db
-            $valuationId = $this->insertModel->insert("valutations", $valuation);
+                // 6.insert valutation into db
+                $valuationId = $this->insertModel->insert("valutations", $valuation);
 
-            // insert tips
-            foreach ($tips as $tip) {
-                $this->insertModel->insert("valutation_tips", [
+                // insert tips
+                foreach ($tips as $tip) {
+                    $this->insertModel->insert("valutation_tips", [
+                        "valuation_id" => $valuationId,
+                        "tip" => $tip,
+                    ]);
+                }
+
+                if (!$chatId) {
+                    throw new \Exception("Errore durante la memorizzazione della valutazione AI");
+                }
+
+                return [
+                    "type" => "valutation",
+                    "item_id" => $itemId,
                     "valuation_id" => $valuationId,
-                    "tip" => $tip
-                ]);
-            }
+                    "ai" => $result,
+                    "tips" => $tips,
+                ];
 
-            if (!$chatId) {
-                throw new \Exception("Errore durante la memorizzazione della valutazione AI");
-            }
-
-            return [
-                "type" => "valutation",
-                "item_id" => $itemId,
-                "valuation_id" => $valuationId,
-                "ai" => $result,
-                "tips" => $tips,
-            ];
-            
-        });
+            },
+        );
     }
 }

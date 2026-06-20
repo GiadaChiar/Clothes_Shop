@@ -45,9 +45,9 @@ export default function Registration() {
                 credentials.surname,
                 credentials.password,
             )
-            console.log("richiesta che è tornata", user);
+            
             if (user.type === "registration") {
-                console.log("arrivato richiesta", user.type)
+                
                 if (user.success === false) {
                     setPopup({
                         visible: true,

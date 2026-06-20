@@ -4,7 +4,8 @@ namespace App\Models;
 
 use PDO;
 
-class UserModel{
+class UserModel
+{
     private PDO $db;
 
     public function __construct(PDO $db)
@@ -12,25 +13,27 @@ class UserModel{
         $this->db = $db;
     }
 
-    public function findByEmail(string $email): ?array{
+    public function findByEmail(string $email): ?array
+    {
         $query = "
         SELECT id, email, password_hash
-        FROM users 
+        FROM users
         WHERE email = :email";
 
         $stmt = $this->db->prepare($query);
 
 
         $stmt->bindParam(":email", $email);
-    
+
 
         $stmt->execute();
 
-        $result= $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
 
-        return $result ?: null;;
+        return $result ?: null;
+        ;
 
     }
 }
