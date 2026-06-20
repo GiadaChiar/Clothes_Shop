@@ -8,8 +8,7 @@ use App\AI\OpenAIClient;
 
 
 
-//require_once __DIR__ . '/../AI/OpenAIClient.php';
-//require_once __DIR__ . '/../function/downloadImage.php';
+
 require_once dirname(__DIR__, 2) . '/function/downloadImage.php';
 
 
