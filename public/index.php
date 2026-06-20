@@ -1,7 +1,20 @@
 <?php
 
+$allowedOrigins = [
+    'http://localhost:5174',
+    'https://clothesshop-production.up.railway.app/'
+];
+
+if (
+    isset($_SERVER['HTTP_ORIGIN']) &&
+    in_array($_SERVER['HTTP_ORIGIN'], $allowedOrigins)
+) {
+    header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
+}
+
+
 // 🔥 CORS GLOBALI (DEV)
-header("Access-Control-Allow-Origin: http://localhost:5174");
+//header("Access-Control-Allow-Origin: http://localhost:5174");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 
@@ -33,7 +46,4 @@ if ($uri === '') {
 }
 
 $router->dispatch($uri, $pdo);
-var_dump($_SERVER['REQUEST_URI']);
-var_dump($_SERVER['REQUEST_METHOD']);
-var_dump($uri);
-exit;
+
