@@ -5,6 +5,15 @@ use App\Controllers\UserController;
 use App\Controllers\ItemController;
 
 
+//standard route default 
+$router->get('/', function () {
+    echo json_encode([
+        "success" => true,
+        "message" => "ClothesShop API is running"
+    ]);
+});
+
+
 // ROUTES API (NO VIEW)
 
 // POST email and password for login 
